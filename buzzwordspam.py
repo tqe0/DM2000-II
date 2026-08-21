@@ -41,8 +41,6 @@ def print_options():
                    "BLANK": "",
                    "2": "ai",
                    "BLANK1": "",
-                   "3": "full name",
-                   "BLANK2": "",
                    "q": "to quit",}
 
     for k, v in choiceslist.items():
@@ -64,13 +62,14 @@ def send_arguments(arguments):
     chat_key = '/'
     send_key = 'enter'
     typespeed = 0.01
-    message_count = 5
 
-    for _ in range(message_count):
+    shuffled = arguments.copy()
+    r.shuffle(shuffled)
+
+    for response in shuffled:
         if kb.is_pressed('esc'):
             print("aborted")
             break
-        response = r.choice(arguments)
         kb.press_and_release(chat_key)
         t.sleep(delay)
         pyautogui.typewrite(response, interval=typespeed)
